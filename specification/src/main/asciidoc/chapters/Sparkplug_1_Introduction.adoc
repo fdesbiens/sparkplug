@@ -406,8 +406,8 @@ The key words "MUST", "MUST NOT", "REQUIRED", "SHALL", "SHALL NOT", "SHOULD", "S
 "RECOMMENDED", "MAY", and "OPTIONAL" in this document are to be interpreted as described in BCP 14
 [BCP14].
 
-All normative statements in this document are highlighted in [yellow-background]*yellow text as
-shown here*.
+All normative statements in this document are highlighted in **bold text as
+shown here**.
 
 [[introduction_leveragint_standards_and_open_source]]
 === Leveraging Standards and Open Source

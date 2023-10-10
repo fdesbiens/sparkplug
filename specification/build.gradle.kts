@@ -48,6 +48,99 @@ val asciidoctorDocbook by tasks.registering(AsciidoctorTask::class) {
     failureLevel = Severity.WARN
 }
 
+// Full version of the spec in Docbook format. Used to produce the ISO/IEC 20237 version of the spec.
+// To convert from Docbook to docx, use PanDoc. 
+// Once installed, execute the following commands from the specification/src/main/asciidoc folder:
+// copy ..\..\..\build\docs\docbook\sparkplug_spec.xml
+// pandoc --from docbook --to docx --output sparkplug_specv300_A4.docx --reference-doc sparkplug_spec_A4_reference_file.docx sparkplug_spec.xml  
+val asciidoctorDocbookFull by tasks.registering(AsciidoctorTask::class) {
+    group = "spec"
+
+    baseDirFollowsSourceDir()
+    sourceDirProperty.set(layout.dir(combineSpecSourceWithNormativeAppendix.map { it.destinationDir }))
+    dependsOn(combineSpecSourceWithNormativeAppendix) // needed as sourceDirProperty does not capture dependency
+    sources {
+        include("sparkplug_spec.adoc")
+    }
+    outputDirProperty.set(layout.buildDirectory.dir("docs/docbookA4"))
+
+    resources {
+        from("src/main/asciidoc/assets/images")
+        into("assets/images")
+    }
+    
+    outputOptions {
+        setBackends(listOf("docbook"))
+    }
+
+    options = mapOf(
+        "doctype" to "article",
+        "header_footer" to "true"
+    )
+    attributes = mapOf(
+        "project-version" to version,
+        "imagesdir" to "assets/images",
+        "toc" to "auto"
+    )
+
+    failureLevel = Severity.WARN
+}
+
+
+
+val asciidoctorPdfA4 by tasks.registering(AsciidoctorTask::class) {
+    group = "spec"
+
+    baseDirFollowsSourceDir()
+    sourceDirProperty.set(layout.dir(combineSpecSourceWithNormativeAppendix.map { it.destinationDir }))
+    dependsOn(combineSpecSourceWithNormativeAppendix) // needed as sourceDirProperty does not capture dependency
+    sources {
+        include("sparkplug_spec.adoc")
+    }
+    outputDirProperty.set(layout.buildDirectory.dir("docs/pdf"))
+
+    resources {
+        from("src/main/asciidoc/assets/images")
+        into("assets/images")
+    }
+
+    outputOptions {
+        setBackends(listOf("pdf"))
+    }
+
+    configure<AsciidoctorJExtension> {
+        modules {
+            diagram.use()
+            pdf.version(project.property("plugin.asciidoctor.pdf.version"))
+        }
+    }
+
+    options = mapOf(
+        "doctype" to "book",
+        "header_footer" to "true",
+        "template_engine" to "slim",
+        "compact" to "false"
+    )
+    attributes = mapOf(
+        "source-highlighter" to "highlight.js",
+        "pagenums" to "true",
+        "numbered" to "true",
+        "docinfo2" to "true",
+        "experimental" to "false",
+        "linkcss" to "false",
+        "toc" to "true",
+        "project-version" to project.version,
+        "imagesdir" to "assets/images",
+        "outfilesuffix" to "A4.pdf",
+        "pdf-page-size" to "A4",
+        "pdf-themesdir" to "themes"
+        // Removed the Sparkplug PDF theme since ISO does not want the yellow highlighting.
+    )
+
+    failureLevel = Severity.WARN
+}
+
+
 val asciidoctorPdf by tasks.registering(AsciidoctorTask::class) {
     group = "spec"
 

@@ -85,7 +85,7 @@ message denoting that the Primary Host application is online.
 .Figure 4 - Host Session Establishment
 plantuml::{assetsdir}assets/plantuml/host-session-establishment.puml[format=svg, alt="Host Session Establishment"]
 
-The session diagram in Figure 3 - Host Session Establishment shows a very simple topology with a
+The session diagram in Figure 4 - Host Session Establishment shows a very simple topology with a
 single MQTT Server. The steps outlined in the session diagram are defined as follows:
 
 [arabic]
@@ -256,7 +256,7 @@ MQTT 'Session Expiry Interval' to zero.
 .Figure 5 - Edge Node MQTT Session Establishment
 plantuml::{assetsdir}assets/plantuml/edge-node-mqtt-session-establishment.puml[format=svg, alt="Edge Node MQTT Session Establishment"]
 
-The session diagram in Figure 4 - Edge Node MQTT Session Establishment shows a very simple topology
+The session diagram in Figure 5 - Edge Node MQTT Session Establishment shows a very simple topology
 with a single MQTT Server. The steps outlined in the session diagram are defined as follows:
 
 [arabic]
@@ -436,7 +436,7 @@ session diagram outlines the requirements:
 .Figure 6 - MQTT Device Session Establishment
 plantuml::{assetsdir}assets/plantuml/mqtt-device-session-establishment.puml[format=svg, alt="MQTT Device Session Establishment"]
 
-The session diagram in Figure 5 - MQTT Device Session Establishment shows a simple topology with
+The session diagram in Figure 6 - MQTT Device Session Establishment shows a simple topology with
 all the Sparkplug elements in place i.e. Host Application, MQTT Server(s), Sparkplug Edge Node and
 this element, the device element. The steps outlined in the session diagram are defined as follows:
 
